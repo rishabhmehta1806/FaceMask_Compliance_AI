@@ -1,0 +1,46 @@
+project:
+  name: "Explainable Uncertainty-Aware Face Mask Compliance"
+  seed: 42
+  classes:
+  - correctly_worn
+  - nose_exposed
+  - below_chin
+  - no_mask
+
+detector:
+  model_path: "models/yolov8n-face.pt"
+  confidence: 0.35
+  image_size: 640
+  use_mediapipe_fallback: true
+
+classifier:
+  checkpoint_path: "models/best_mask_classifier.pth"
+  image_size: 224
+  uncertainty_threshold: 0.43
+  minimum_confidence: 0.58
+
+quality:
+  blur_reference: 120.0
+  minimum_face_pixels: 72
+  minimum_score_for_decision: 0.35
+
+tracking:
+  alert_after_seconds: 5.0
+  history_length: 12
+  track_ttl_seconds: 1.5
+  minimum_quality_for_alert: 0.45
+  iou_match_threshold: 0.25
+
+alerts:
+  csv_path: "logs/alerts.csv"
+  save_face_crops: false
+
+training:
+  image_size: 224
+  batch_size: 32
+  epochs: 40
+  learning_rate: 0.0003
+  weight_decay: 0.0001
+  workers: 4
+  early_stopping_patience: 8
+  pretrained_backbone: true

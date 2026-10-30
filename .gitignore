@@ -1,0 +1,35 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+*.mp4
+*.avi
+models/*.pt
+models/*.pth
+runs/*
+reports/*.json
+reports/*.png
+logs/*.csv
+data/input/*
+!data/input/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Never upload original datasets
+data/raw/
+
+# Do not upload local import manifest
+reports/fmd_import_manifest.csv
+
+# Exclude model weights by default
+models/*.pt
+models/*.pth
+
+# Allow these two project models
+!models/best_mask_classifier.pth
+!models/yolov8n-face.pt
+
+# Local secrets
+.env
+.env.*

@@ -1,0 +1,18 @@
+MASKGUARD AI — START HERE
+
+1. Open README.md and install the Python dependencies.
+2. Download the pretrained YOLO face detector:
+   python scripts/download_face_model.py
+3. Build data/input with five folders:
+   correctly_worn, nose_exposed, mouth_exposed, below_chin, no_mask
+4. Import supported MaskedFace-Net subsets (optional), then add below_chin and no_mask examples:
+   python scripts/import_maskedfacenet.py --source PATH_TO_EXTRACTED_DATASET
+5. Split data and train the actual classifier:
+   python scripts/prepare_dataset.py --force
+   python train.py --epochs 40 --batch-size 8 --workers 0
+6. Run webcam:
+   python run_camera.py --source 0
+7. Optional web demo:
+   streamlit run app.py
+
+IMPORTANT: This archive does not contain a trained five-class mask-classifier weight file because no labelled dataset was supplied and the large public dataset was not downloaded in the build environment. Run step 5 to create models/best_mask_classifier.pth. Do not describe the classifier as trained until that step finishes and reports/evaluation.json has been inspected.
